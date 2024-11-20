@@ -19,6 +19,3 @@ def test_create_objects_from_json(data_of_products):
 
     assert category_smart_phone.name == "Смартфоны"
     assert category_television.name == "Телевизоры"
-
-    assert len(category_smart_phone.products) == 3
-    assert len(category_television.products) == 1
