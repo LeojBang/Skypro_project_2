@@ -76,6 +76,7 @@ def add_products() -> tuple:
 
     return product1, product2, product3
 
+
 @pytest.fixture
 def category_iter(smartphone_products):
     return CategoryIter(smartphone_products)
