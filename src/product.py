@@ -11,6 +11,14 @@ class Product:
         self.quantity = quantity
         Product.products_list.append(self)
 
+    def __str__(self) -> str:
+        """Возвращает информацию о товаре"""
+        return f"{self.name}, {self.__price} руб. Остаток: {self.quantity} шт."
+
+    def __add__(self, other: "Product") -> Any:
+        """Суммирует стоимость товаров"""
+        return self.quantity * self.__price + other.quantity * other.__price
+
     @classmethod
     def new_product(cls, new_product: dict) -> Any:
         for prod in cls.products_list:
