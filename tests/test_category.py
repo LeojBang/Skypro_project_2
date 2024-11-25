@@ -50,5 +50,5 @@ def test_add_product(smartphone_products):
     assert smartphone_products.products == expected
 
 
-def test_str_method(smartphone_products, capsys):
-    assert smartphone_products.__str__() == "Смартфоны, количество продуктов: 13 шт."
+def test_str_method(smartphone_products):
+    assert str(smartphone_products) == "Смартфоны, количество продуктов: 13 шт."

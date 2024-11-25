@@ -1,6 +1,7 @@
 import pytest
 
 from src.category import Category
+from src.category_iter import CategoryIter
 from src.product import Product
 
 
@@ -74,3 +75,7 @@ def add_products() -> tuple:
     product3 = Product("Xiaomi Redmi Note 11", "1024GB, Синий", 31000.0, 14)
 
     return product1, product2, product3
+
+@pytest.fixture
+def category_iter(smartphone_products):
+    return CategoryIter(smartphone_products)
