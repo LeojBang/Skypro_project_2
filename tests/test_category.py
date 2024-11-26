@@ -18,12 +18,12 @@ def test_category(categories):
     "value, expected",
     [
         (
-                Category(
-                    "Смартфоны",
-                    "123",
-                    [Product("Samsung Galaxy C23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)],
-                ),
-                "Samsung Galaxy C23 Ultra, 180000.0 руб. Остаток: 5",
+            Category(
+                "Смартфоны",
+                "123",
+                [Product("Samsung Galaxy C23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)],
+            ),
+            "Samsung Galaxy C23 Ultra, 180000.0 руб. Остаток: 5 шт.",
         )
     ],
 )
@@ -33,14 +33,22 @@ def test_products(value, expected):
     assert result == expected
 
 
+def test_product_list(smartphone_products):
+    assert len(smartphone_products.product_list) == 2
+
+
 def test_add_product(smartphone_products):
     new_product = Product('55" QLED 4K', "Фоновая подсветка", 123000.0, 7)
     expected = (
-        "Samsung Galaxy C23 Ultra, 180000.0 руб. Остаток: 5\n"
-        "Iphone 15, 210000.0 руб. Остаток: 8\n"
-        '55" QLED 4K, 123000.0 руб. Остаток: 7\n'
+        "Samsung Galaxy C23 Ultra, 180000.0 руб. Остаток: 5 шт.\n"
+        "Iphone 15, 210000.0 руб. Остаток: 8 шт.\n"
+        '55" QLED 4K, 123000.0 руб. Остаток: 7 шт.\n'
     )
 
     smartphone_products.add_product(new_product)
 
     assert smartphone_products.products == expected
+
+
+def test_str_method(smartphone_products):
+    assert str(smartphone_products) == "Смартфоны, количество продуктов: 13 шт."
