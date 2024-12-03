@@ -1,6 +1,7 @@
 import pytest
 
 from src.category import Category
+from src.category_iter import CategoryIter
 from src.product import Product, Smartphone, LawnGrass
 
 
@@ -81,3 +82,7 @@ def add_product():
                              "S23 Ultra", 256, "Серый")
     smartphone2 = Smartphone("Iphone 15", "512GB, Gray space", 210000.0, 8, 98.2, "15", 512, "Gray space")
     return smartphone1, smartphone2
+
+@pytest.fixture
+def category_iter(smartphone_products):
+    return CategoryIter(smartphone_products)
