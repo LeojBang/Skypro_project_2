@@ -1,4 +1,7 @@
+import pytest
+
 from src.product import Product
+from tests.conftest import smartphone
 
 
 def test_product(products):
@@ -49,3 +52,37 @@ def test_normal_price(products, capsys):
     captured = capsys.readouterr()
     assert captured.out == ""
     assert products.price == 200000.0
+
+
+def test_smartphone(smartphone):
+    assert smartphone.name == "Samsung Galaxy S23 Ultra"
+    assert smartphone.description == "256GB, Серый цвет, 200MP камера"
+    assert smartphone.price == 180000.0
+    assert smartphone.quantity == 5
+    assert smartphone.efficiency == 95.5
+    assert smartphone.model == "S23 Ultra"
+    assert smartphone.memory == 256
+    assert smartphone.color == "Серый"
+
+def test_lawn_grass(lawn_grass):
+    assert lawn_grass.name == "Газонная трава"
+    assert lawn_grass.description == "Элитная трава для газона"
+    assert lawn_grass.price == 500.0
+    assert lawn_grass.quantity == 20
+    assert lawn_grass.country == "Россия"
+    assert lawn_grass.germination_period == "7 дней"
+    assert lawn_grass.color == "Зеленый"
+
+def test_add_product(add_product):
+    smartphone1, smartphone2 = add_product
+    res = smartphone1 + smartphone2
+
+    assert res == 2580000.0
+
+def test_add_invalid_product(add_product):
+    smartphone1, smartphone2 = add_product
+
+    with pytest.raises(TypeError):
+        res = smartphone1 + 1
+
+
