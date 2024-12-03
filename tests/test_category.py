@@ -45,7 +45,11 @@ def test_add_product(smartphone_products):
 
     assert smartphone_products.products == expected
 
+
 def test_add_invalid_product(smartphone_products):
     with pytest.raises(TypeError):
         smartphone_products.add_product("Not a product")
 
+
+def test_str_method(smartphone_products):
+    assert str(smartphone_products) == "Смартфоны, количество продуктов: 13 шт."
