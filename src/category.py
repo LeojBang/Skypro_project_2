@@ -1,7 +1,8 @@
+from src.base_entity import BaseEntity
 from src.product import Product
 
 
-class Category:
+class Category(BaseEntity):
     category_count: int = 0
     product_count: int = 0
 
