@@ -2,7 +2,7 @@ import pytest
 
 from src.category import Category
 from src.category_iter import CategoryIter
-from src.product import Product, Smartphone, LawnGrass
+from src.product import LawnGrass, Product, Smartphone
 
 
 @pytest.fixture
@@ -70,8 +70,9 @@ def smartphone_products():
 
 @pytest.fixture
 def smartphone():
-    return Smartphone("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5, 95.5,
-                      "S23 Ultra", 256, "Серый")
+    return Smartphone(
+        "Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5, 95.5, "S23 Ultra", 256, "Серый"
+    )
 
 
 @pytest.fixture
@@ -81,8 +82,9 @@ def lawn_grass():
 
 @pytest.fixture
 def add_product():
-    smartphone1 = Smartphone("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5, 95.5,
-                             "S23 Ultra", 256, "Серый")
+    smartphone1 = Smartphone(
+        "Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5, 95.5, "S23 Ultra", 256, "Серый"
+    )
     smartphone2 = Smartphone("Iphone 15", "512GB, Gray space", 210000.0, 8, 98.2, "15", 512, "Gray space")
     return smartphone1, smartphone2
 
@@ -99,3 +101,8 @@ def add_products() -> tuple:
     product3 = Product("Xiaomi Redmi Note 11", "1024GB, Синий", 31000.0, 14)
 
     return product1, product2, product3
+
+
+@pytest.fixture
+def empty_category():
+    return Category("Пустая категория", "Категория без продуктов", [])

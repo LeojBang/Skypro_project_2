@@ -1,6 +1,7 @@
 from typing import Any
 
 from src.base_entity import BaseEntity
+from src.exceptions import ZeroProductQuantity
 from src.product import Product
 
 
@@ -10,6 +11,8 @@ class Order(BaseEntity):
             self.product = item
         else:
             raise TypeError("Неверный тип объекта")
+        if quantity <= 0:
+            raise ZeroProductQuantity("Количество товара не может быть равно 0")
         self.quantity = quantity
         self.price = price
         self.total_price = self.calculate_total_price()
