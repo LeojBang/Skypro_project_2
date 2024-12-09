@@ -18,12 +18,12 @@ def test_category(categories):
     "value, expected",
     [
         (
-                Category(
-                    "Смартфоны",
-                    "123",
-                    [Product("Samsung Galaxy C23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)],
-                ),
-                "Samsung Galaxy C23 Ultra, 180000.0 руб. Остаток: 5 шт.",
+            Category(
+                "Смартфоны",
+                "123",
+                [Product("Samsung Galaxy C23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)],
+            ),
+            "Samsung Galaxy C23 Ultra, 180000.0 руб. Остаток: 5 шт.",
         )
     ],
 )
@@ -53,3 +53,31 @@ def test_add_invalid_product(smartphone_products):
 
 def test_str_method(smartphone_products):
     assert str(smartphone_products) == "Смартфоны, количество продуктов: 13 шт."
+
+
+def test_middle_price(smartphone_products, empty_category):
+    assert smartphone_products.middle_price() == 195000.0
+    assert empty_category.middle_price() == 0
+
+
+def test_exception_quantity():
+    with pytest.raises(ValueError):
+        Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 0)
+
+
+def test_category_add_product(capsys, smartphone_products, products):
+    smartphone_products.add_product(products)
+    message = capsys.readouterr()
+
+    assert message.out.strip().split("\n")[-2] == "Продукт был добавлен"
+    assert message.out.strip().split("\n")[-1] == "Операция добавления продукта завершена"
+
+
+def test_custom_exception(capsys, smartphone_products):
+    product = Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 1)
+    product.quantity = 0
+    smartphone_products.add_product(product)
+
+    message = capsys.readouterr()
+
+    assert message.out.strip().split("\n")[-2] == "Нельзя добавить продукт с нулевым количеством товара"

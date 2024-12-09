@@ -3,7 +3,6 @@ from unittest.mock import patch
 import pytest
 
 from src.product import Product
-from tests.conftest import smartphone
 
 
 def test_product(products):
@@ -78,6 +77,7 @@ def test_smartphone(smartphone):
     assert smartphone.memory == 256
     assert smartphone.color == "Серый"
 
+
 def test_lawn_grass(lawn_grass):
     assert lawn_grass.name == "Газонная трава"
     assert lawn_grass.description == "Элитная трава для газона"
@@ -87,17 +87,20 @@ def test_lawn_grass(lawn_grass):
     assert lawn_grass.germination_period == "7 дней"
     assert lawn_grass.color == "Зеленый"
 
+
 def test_add_product(add_product):
     smartphone1, smartphone2 = add_product
     res = smartphone1 + smartphone2
 
     assert res == 2580000.0
 
+
 def test_add_invalid_product(add_product):
     smartphone1, smartphone2 = add_product
 
     with pytest.raises(TypeError):
-        res = smartphone1 + 1
+        smartphone1 + 1
+
 
 def test_add_method(add_products):
     result_1 = add_products[0] + add_products[1]
@@ -108,4 +111,3 @@ def test_add_method(add_products):
 
     result_3 = add_products[1] + add_products[2]
     assert result_3 == 2114000.0
-
